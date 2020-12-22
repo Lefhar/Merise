@@ -39,24 +39,6 @@
       </PK>
    </Table>
    <Table>
-      <Name>salle</Name>
-      <Column>
-         <Name>num_salle</Name>
-         <Type>INT</Type>
-      </Column>
-      <Column>
-         <Name>nom_classe</Name>
-         <Type>VARCHAR(50)</Type>
-         <Property>UNIQUE</Property>
-      </Column>
-      <PK>
-         <Key>num_salle</Key>
-      </PK>
-      <AK>
-         <Key>nom_classe</Key>
-      </AK>
-   </Table>
-   <Table>
       <Name>mati&#233;re</Name>
       <Column>
          <Name>m_nom</Name>
@@ -82,6 +64,10 @@
          <Type>VARCHAR(30)</Type>
       </Column>
       <Column>
+         <Name>num_salle</Name>
+         <Type>INT</Type>
+      </Column>
+      <Column>
          <Name>nom_eleve</Name>
          <Type>VARCHAR(20)</Type>
          <Property>NOT NULL</Property>
@@ -89,88 +75,62 @@
       <Column>
          <Name>prenom_eleve</Name>
          <Type>VARCHAR(20)</Type>
-         <Property>NOT NULL</Property>
-      </Column>
-      <Column>
-         <Name>num_salle</Name>
-         <Type>INT</Type>
          <Property>NOT NULL</Property>
       </Column>
       <PK>
          <Key>nom_classe</Key>
       </PK>
-      <AK>
-         <Key>num_salle</Key>
-      </AK>
       <FK>
          <Key>nom_eleve, prenom_eleve</Key>
          <Reference>eleve(nom_eleve, prenom_eleve)</Reference>
       </FK>
-      <FK>
-         <Key>num_salle</Key>
-         <Reference>salle(num_salle)</Reference>
-      </FK>
    </Table>
    <Table>
-      <Name>note</Name>
-      <Column>
-         <Name>id</Name>
-         <Type>INT</Type>
-      </Column>
-      <Column>
-         <Name>note_eleve</Name>
-         <Type>INT</Type>
-      </Column>
-      <Column>
-         <Name>m_nom</Name>
-         <Type>VARCHAR(30)</Type>
-         <Property>NOT NULL</Property>
-      </Column>
+      <Name>noter</Name>
       <Column>
          <Name>nom_eleve</Name>
          <Type>VARCHAR(20)</Type>
-         <Property>NOT NULL</Property>
       </Column>
       <Column>
          <Name>prenom_eleve</Name>
          <Type>VARCHAR(20)</Type>
-         <Property>NOT NULL</Property>
-      </Column>
-      <PK>
-         <Key>id</Key>
-      </PK>
-      <FK>
-         <Key>m_nom</Key>
-         <Reference>mati&#233;re(m_nom)</Reference>
-      </FK>
-      <FK>
-         <Key>nom_eleve, prenom_eleve</Key>
-         <Reference>eleve(nom_eleve, prenom_eleve)</Reference>
-      </FK>
-   </Table>
-   <Table>
-      <Name>nbr_heure</Name>
-      <Column>
-         <Name>id</Name>
-         <Type>INT</Type>
-      </Column>
-      <Column>
-         <Name>nbr_heure</Name>
-         <Type>INT</Type>
-         <Property>NOT NULL</Property>
       </Column>
       <Column>
          <Name>m_nom</Name>
          <Type>VARCHAR(30)</Type>
-         <Property>NOT NULL</Property>
+      </Column>
+      <Column>
+         <Name>note</Name>
+         <Type>INT</Type>
+      </Column>
+      <PK>
+         <Key>nom_eleve, prenom_eleve, m_nom</Key>
+      </PK>
+      <FK>
+         <Key>nom_eleve, prenom_eleve</Key>
+         <Reference>eleve(nom_eleve, prenom_eleve)</Reference>
+      </FK>
+      <FK>
+         <Key>m_nom</Key>
+         <Reference>mati&#233;re(m_nom)</Reference>
+      </FK>
+   </Table>
+   <Table>
+      <Name>enseigner</Name>
+      <Column>
+         <Name>m_nom</Name>
+         <Type>VARCHAR(30)</Type>
       </Column>
       <Column>
          <Name>nom_classe</Name>
          <Type>VARCHAR(30)</Type>
-         <Property>NOT NULL</Property>
+      </Column>
+      <Column>
+         <Name>nbr</Name>
+         <Type>INT</Type>
       </Column>
       <PK>
-         <Key>id</Key>
+         <Key>m_nom, nom_classe</Key>
       </PK>
       <FK>
          <Key>m_nom</Key>
