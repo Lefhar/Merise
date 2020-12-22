@@ -172,12 +172,6 @@
       <PK>
          <Key>id</Key>
       </PK>
-      <AK>
-         <Key>m_nom</Key>
-      </AK>
-      <AK>
-         <Key>nom_classe</Key>
-      </AK>
       <FK>
          <Key>m_nom</Key>
          <Reference>mati&#233;re(m_nom)</Reference>

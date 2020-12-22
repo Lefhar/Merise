@@ -55,8 +55,6 @@ DoCmd.RunSQL "CREATE TABLE nbr_heure(" & _
    "m_nom VARCHAR(30) NOT NULL," & _
    "nom_classe VARCHAR(30) NOT NULL," & _
    "PRIMARY KEY(id)," & _
-   "UNIQUE(m_nom)," & _
-   "UNIQUE(nom_classe)," & _
    "FOREIGN KEY(m_nom) REFERENCES matiére(m_nom)," & _
    "FOREIGN KEY(nom_classe) REFERENCES classe(nom_classe)" & _
 ");"   
