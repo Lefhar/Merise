@@ -1,0 +1,120 @@
+Sub Create_Tables()
+
+DoCmd.RunSQL "CREATE TABLE customers(" & _
+   "cus_id INT," & _
+   "cus_lastname VARCHAR(50) NOT NULL," & _
+   "cus_firstname VARCHAR(50) NOT NULL," & _
+   "cus_address VARCHAR(150) NOT NULL," & _
+   "cus_zipcode VARCHAR(5) NOT NULL," & _
+   "cus_city VARCHAR(50)," & _
+   "cus_mail VARCHAR(255)," & _
+   "cus_phone VARCHAR(10) NOT NULL," & _
+   "cus_password VARCHAR(60) NOT NULL," & _
+   "cus_add_date DATETIME NOT NULL," & _
+   "cus_update_date DATETIME NOT NULL," & _
+   "PRIMARY KEY(cus_id)" & _
+");"   
+
+DoCmd.RunSQL "CREATE TABLE suppliers(" & _
+   "sup_id INT," & _
+   "sup_name VARCHAR(50) NOT NULL," & _
+   "sup_city VARCHAR(50)," & _
+   "sup_address VARCHAR(150)," & _
+   "sup_contact VARCHAR(100)," & _
+   "sup_phone VARCHAR(10)," & _
+   "sup_mail VARCHAR(75)," & _
+   "PRIMARY KEY(sup_id)" & _
+");"   
+
+DoCmd.RunSQL "CREATE TABLE category(" & _
+   "cat_id INT," & _
+   "cat_name VARCHAR(50) NOT NULL," & _
+   "cat_subcat INT NOT NULL," & _
+   "PRIMARY KEY(cat_id)" & _
+");"   
+
+DoCmd.RunSQL "CREATE TABLE orders(" & _
+   "ord_id INT," & _
+   "ord_date DATETIME," & _
+   "ord_q INT," & _
+   "ord_d_trans DATETIME," & _
+   "ord_d_ship DATETIME," & _
+   "ord_d_reception DATETIME," & _
+   "cus_id INT," & _
+   "PRIMARY KEY(ord_id)," & _
+   "FOREIGN KEY(cus_id) REFERENCES customers(cus_id)" & _
+");"   
+
+DoCmd.RunSQL "CREATE TABLE shops(" & _
+   "sho_id INT," & _
+   "sho_name VARCHAR(50)," & _
+   "sho_address VARCHAR(250)," & _
+   "sho_zipcode INT," & _
+   "sho_city VARCHAR(50)," & _
+   "PRIMARY KEY(sho_id)" & _
+");"   
+
+DoCmd.RunSQL "CREATE TABLE service(" & _
+   "ser_id INT," & _
+   "ser_name VARCHAR(50)," & _
+   "PRIMARY KEY(ser_id)" & _
+");"   
+
+DoCmd.RunSQL "CREATE TABLE seller(" & _
+   "sel_id INT," & _
+   "sel_post_name VARCHAR(50)," & _
+   "sel_lastname VARCHAR(50) NOT NULL," & _
+   "sel_firstname VARCHAR(50) NOT NULL," & _
+   "sel_mail VARCHAR(255) NOT NULL," & _
+   "sel_address VARCHAR(150) NOT NULL," & _
+   "sel_zipcode INT NOT NULL," & _
+   "sel_salary DECIMAL(15,2) NOT NULL," & _
+   "sel_enter_d DATETIME," & _
+   "sel_gender INT NOT NULL," & _
+   "sel_children INT," & _
+   "ser_id INT NOT NULL," & _
+   "PRIMARY KEY(sel_id)," & _
+   "FOREIGN KEY(ser_id) REFERENCES service(ser_id)" & _
+");"   
+
+DoCmd.RunSQL "CREATE TABLE products(" & _
+   "pro_id INT," & _
+   "pro_name VARCHAR(50)," & _
+   "pro_ref VARCHAR(8)," & _
+   "pro_ean VARCHAR(13)," & _
+   "pro_stock INT," & _
+   "pro_stalert INT," & _
+   "pro_price DECIMAL(15,2)," & _
+   "pro_color VARCHAR(50)," & _
+   "pro_description VARCHAR(300)," & _
+   "pro_d_add DATETIME," & _
+   "pro_d_mod DATETIME," & _
+   "pro_picture VARCHAR(50)," & _
+   "pro_blocked LOGICAL," & _
+   "sel_id INT NOT NULL," & _
+   "cat_id INT," & _
+   "sup_id INT NOT NULL," & _
+   "PRIMARY KEY(pro_id)," & _
+   "FOREIGN KEY(sel_id) REFERENCES seller(sel_id)," & _
+   "FOREIGN KEY(cat_id) REFERENCES category(cat_id)," & _
+   "FOREIGN KEY(sup_id) REFERENCES suppliers(sup_id)" & _
+");"   
+
+DoCmd.RunSQL "CREATE TABLE commerce(" & _
+   "sho_id INT," & _
+   "ser_id INT," & _
+   "PRIMARY KEY(sho_id, ser_id)," & _
+   "FOREIGN KEY(sho_id) REFERENCES shops(sho_id)," & _
+   "FOREIGN KEY(ser_id) REFERENCES service(ser_id)" & _
+");"   
+
+DoCmd.RunSQL "CREATE TABLE order_detail(" & _
+   "ord_id INT," & _
+   "ode_discount INT," & _
+   "pro_id INT NOT NULL," & _
+   "PRIMARY KEY(ord_id)," & _
+   "FOREIGN KEY(ord_id) REFERENCES orders(ord_id)," & _
+   "FOREIGN KEY(pro_id) REFERENCES products(pro_id)" & _
+");"   
+
+End Sub

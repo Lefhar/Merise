@@ -132,7 +132,19 @@
          <Comment>date de la commande</Comment>
       </Column>
       <Column>
+         <Name>ord_q</Name>
+         <Type>INT</Type>
+      </Column>
+      <Column>
          <Name>ord_d_trans</Name>
+         <Type>DATETIME</Type>
+      </Column>
+      <Column>
+         <Name>ord_d_ship</Name>
+         <Type>DATETIME</Type>
+      </Column>
+      <Column>
+         <Name>ord_d_reception</Name>
          <Type>DATETIME</Type>
       </Column>
       <Column>
